@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Timed JavaScript Quiz</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+</head>
+
+<body class="vh-100 bg-dark d-flex justify-content-center align-items-center">
+  <main>
+
+    <section class="row d-inline-flex justify-content-center"> 
+
+        <h1 class="display-3 text-center text-white">Quiz</h1>
+        <hr />
+
+        <!-- <button id="start-quiz" class="btn btn-primary btn-lg">Start</button> -->
+
+        <div id="quiz" class="text-center text-white">
+            <h2 id="question-text" class="display-5"></h2>
+            <form>
+                <div>
+                    <input type="radio" id="a0" name="answer"></input>
+                    <label for="a0" class="answer"></label>
+                </div>
+                <div>
+                    <input type="radio" id="a1" name="answer"></input>
+                    <label for="a1" class="answer"></label>
+                </div>
+                <div>
+                    <input type="radio" id="a2" name="answer"></input>
+                    <label for="a2" class="answer"></label>
+                </div>
+                <div>
+                    <input type="radio" id="a3" name="answer"></input>
+                    <label for="a3" class="answer"></label>
+                </div>
+            </form>
+
+            <button id="submit" class="btn btn-primary btn-lg">confirm</button>
+            
+        </div>
+
+        <!-- <hr />
+
+        <div class="card text-center">
+            <div class="card-header">
+              Countdown
+            </div>
+            <div class="card-body">
+              <p id="timer" class="card-text"></p>
+              <button id="start-quiz" class="btn btn-primary btn-lg">Start</button>
+            </div>
+          </div> -->
+
+        <!-- <p id="timer"></p> -->
+    </section>
+
+    <hr />
+
+    <section class="row d-inline-flex justify-content-center align-items-center">
+        <div class="card text-center">
+            <div class="card-header">
+                Countdown
+            </div>
+            <div class="card-body">
+                <p id="timer" class="card-text"></p>
+                <button id="start-quiz" class="btn btn-primary btn-lg">Start</button>
+            </div>
+        </div>
+    </section>
+
+  </main>
+
+  <script type="text/javascript" src="assets/questions.js"></script>
+  <script type="text/javascript" src="assets/script.js">
+  </script>
+</body>
+
+</html>
