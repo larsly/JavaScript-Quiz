@@ -13,7 +13,8 @@ let questionTextEl = document.getElementById("question-text");
 let answerEls = document.getElementsByClassName("answer");
 var submitBtnEl = document.getElementById('submit');
 var displayTimer = document.getElementById('timer');
-
+var quizDisplay = document.getElementById("quiz");
+var formDisplay = document.getElementById("highscore");
 
 function timer(amount) {
     if (quizStarted) {
@@ -32,18 +33,33 @@ timerBtnEl.addEventListener('click', function(event) {
     if (quizStarted) {
         return;
     }
-    console.log("hi");
     quizStarted = true;
     setInterval(function() {timer(1)}, 1000);
     renderQuestion();
+    hide();
 });
+
+quizDisplay.style.display = "none";
+
+function hide() {
+    toggleDisplay(timerBtnEl);
+    toggleDisplay(quizDisplay);
+  };
+
+function toggleDisplay(element) {
+    if (element.style.display === "none") {
+        element.style.display = "block";
+      } else {
+        element.style.display = "none";
+      }
+};
 
 function renderQuestion() {
     questionTextEl.innerText = questions[currentQuestion].text;
     for (let i=0; i < 4; i++) {
         answerEls[i].innerText = questions[currentQuestion].answers[i];
     }
-}
+};
 
 submitBtnEl.addEventListener('click', function(event){
     event.preventDefault();
@@ -51,14 +67,28 @@ submitBtnEl.addEventListener('click', function(event){
         timer(5);
     }
     currentQuestion++;
-    renderQuestion();
+    if (currentQuestion >= questions.length) {
+        endQuiz();
+    } else {
+        renderQuestion();
+    }
 });
+
+formDisplay.style.display = "none";
+
+function endQuiz() {
+    quizStarted = false;
+    toggleDisplay(quizDisplay);
+    toggleDisplay(scoreDisplay);
+    toggleDisplay(formDisplay);
+}
+
 
 // display timer
 // display correct answer
 // invisible question before quiz starts
 // end quiz
-// high score (save with local storage)
+// high score = time left (save with local storage)
 // nice style :)
 
 
