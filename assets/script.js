@@ -1,10 +1,3 @@
-// setInterval(myTimer, 1000);
-
-// function myTimer() {
-//   const d = new Date();
-//   document.getElementById("demo").innerHTML = d.toLocaleTimeString();
-// }
-
 let currentQuestion = 0;
 let counter = 10;
 let quizStarted = false;
@@ -15,6 +8,9 @@ var submitBtnEl = document.getElementById('submit');
 var displayTimer = document.getElementById('timer');
 var quizDisplay = document.getElementById("quiz");
 var formDisplay = document.getElementById("highscore");
+var scoreSubmit = document.getElementById("send");
+var initialsEl = document.getElementById("formGroupExampleInput");
+var highscoreDisplay = document.getElementById("list");
 
 function timer(amount) {
     if (quizStarted) {
@@ -79,21 +75,45 @@ formDisplay.style.display = "none";
 function endQuiz() {
     quizStarted = false;
     toggleDisplay(quizDisplay);
-    toggleDisplay(scoreDisplay);
     toggleDisplay(formDisplay);
 }
 
+function saveScoreToStorage(scores) {
+    localStorage.setItem('scores', JSON.stringify(scores));
+}
 
-// display timer
-// display correct answer
-// invisible question before quiz starts
-// end quiz
-// high score = time left (save with local storage)
-// nice style :)
+function printScoreData() {
+    var scores = readScoresFromStorage();
+    for (var i = 0; i < scores.length; i++) {
+        console.log(scores[i].initials);
+        console.log(scores[i].scores);
+        var userScore = document.createElement("p");
+        userScore.innerText = `${scores[i].initials} - ${scores[i].scores}`;
+        highscoreDisplay.appendChild(userScore);
+};
+}
 
 
+function handleScoresFormSubmit(event) {
+    event.preventDefault();
+    var newScore = {
+        initials: initialsEl.value,
+        scores: counter,
+    };
+    var scores = readScoresFromStorage();
+    scores.push(newScore);
+    saveScoreToStorage(scores);
+    printScoreData();
+}
 
+function readScoresFromStorage() {
+    var scores = localStorage.getItem('scores');
+    if (scores) {
+        scores = JSON.parse(scores);
+    } else {
+        scores = [];
+    }
+    return scores;
+}
 
-// setInterval(timer, 1000);
-
-// timer(5); - decrement
+scoreSubmit.addEventListener('click', handleScoresFormSubmit);
